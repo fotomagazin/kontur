@@ -1,4 +1,4 @@
-// Скриншоты новых окон (автосохранение, история, экспорт, версия, обратная связь): node tools/shots5.mjs "$PWD/kontur.html"
+// Скриншоты новых окон (автосохранение, история, экспорт, версия, обратная связь): node tools/shots5.mjs "$PWD/web/kontur.html"
 import { open, sleep } from './cdp.mjs';
 const b = await open({ port: 9490, w: 1440, h: 900 }); const E = x => b.ev(x), SH = n => b.shot(`${process.env.SP}/shots/f-${n}.png`);
 await b.go('file://' + process.argv[2]); await sleep(600);

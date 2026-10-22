@@ -1,0 +1,18 @@
+{
+  "name": "kontur-windows",
+  "productName": "Контур",
+  "version": "0.2.0",
+  "description": "Контур — векторный редактор (программа для Windows)",
+  "author": "Контур",
+  "license": "UNLICENSED",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "electron": "44.6.0",
+    "electron-builder": "26.17.0"
+  }
+}

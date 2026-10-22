@@ -1,5 +1,5 @@
 // Полная проверка Контура в headless Chrome: инструменты, панель, список объектов, фото, QR, экспорт, сохранение/открытие.
-// Запуск из папки 04_Контур:  node tools/test.mjs "$PWD/kontur.html"   (в конце — «ВСЁ ОК» или список ошибок; скриншоты — в папке SP/shots)
+// Запуск из папки 04_Контур:  node tools/test.mjs "$PWD/web/kontur.html"   (в конце — «ВСЁ ОК» или список ошибок; скриншоты — в папке SP/shots)
 import { open, sleep } from './cdp.mjs';
 import { readdirSync, readFileSync, rmSync, mkdirSync, statSync } from 'node:fs';
 const [, , FILE, TAG = 'new', PORT = 9450] = process.argv;
@@ -212,6 +212,20 @@ const nBefore = await n();
   ok(!await E(`!!byId('${tid}').txt`) && await E(`JSON.stringify(byId('${tid}').sp)`) === sp0 && await E('hn[hi]') === 'Текст в кривые', 'В кривые — буквы те же, «памятка» убрана');
   await b.key('z', { mod: 4 }); ok(await E(`!!byId('${tid}').txt`), 'Ctrl+Z — снова текст');
   await b.key('v'); }
+// --- PDF и Illustrator (.ai) — кривыми; CorelDRAW (.cdr) — подсказка; значки «Импорт» (стрелка внутрь) и «Экспорт» (стрелка наружу)
+ok(await E(`document.querySelector('#expBtn').dataset.i`) === 'export' && await E(`document.querySelector('#importBtn').dataset.i`) === 'download', 'значки: Импорт — стрелка внутрь, Экспорт — наружу');
+{ const before = await E('JSON.stringify(S.objects.map(o=>[o.fill,o.stroke,o.op,Object.values(objBox(o)||{}).map(v=>+v.toFixed(2))]))'), keep = await E('snap()'), pg = await E('JSON.stringify(S.page)');
+  const r = await E(`(async()=>{const f=new File([buildPDF()],'проба.ai');const n0=S.objects.length;await importFiles([f]);const add=S.objects.slice(n0);
+    return JSON.stringify(add.map(o=>[o.fill,o.stroke,o.op,Object.values(objBox(o)||{}).map(v=>+v.toFixed(2))]))})()`);
+  const vec = JSON.parse(before).filter(x => x[3].length), got = JSON.parse(r);
+  ok(got.length >= vec.length - (await E(`S.objects.filter(o=>o.type==='image'&&!o.hid).length`)) && /Открыто кривыми/.test(await E(`document.querySelector('#toast').textContent`)), 'свой PDF, названный .ai, открылся кривыми: ' + got.length + ' объектов · ' + await E(`document.querySelector('#toast').textContent`));
+  ok(/фото внутри файла пропущены/.test(await E(`document.querySelector('#toast').textContent`)), 'про пропущенные фото — сказано');
+  await E(`restoreSnap=${JSON.stringify(keep)};S.objects=JSON.parse(restoreSnap).objects;S.page=${pg};commit('тест');render();panel()`);
+  b.logs.length = 0; await E(`importFiles([new File(['%!PS-Adobe-3.0\\n%%Creator: Adobe Illustrator(R) 8.0\\n'],'старый.ai')])`); await sleep(300);
+  ok(b.logs.some(l => /без PDF-совместимости/.test(l)), 'старый .ai без PDF-копии — понятное объяснение, что сделать');
+  b.logs.length = 0; await E(`importFiles([new File(['RIFF'],'макет.cdr')])`); await sleep(200);
+  ok(b.logs.some(l => /CorelDRAW/.test(l) && /Экспорт/.test(l) && /Inkscape/.test(l)), '.cdr — подсказка: экспорт в PDF/AI из CorelDRAW или Inkscape');
+  b.logs.length = 0; }
 // --- история шагов
 await clickEl('#histBtn'); ok(await E(`document.querySelector('#hist').classList.contains('open')`), 'меню «История» открылось');
 const hl = await E(`[...document.querySelectorAll('#hist div')].map(d=>d.textContent)`); ok(hl.length > 20 && hl[0] === 'Новый документ' && hl.some(t => /Новая фигура «Прямоугольник/.test(t)) && hl.some(t => /QR-код/.test(t)), 'шаги с названиями: ' + hl.length + ', последний «' + hl[hl.length - 1] + '»');
@@ -235,8 +249,8 @@ await clickEl('#expBtn'); await b.key('Escape', { code: 'Escape' }); ok(!await E
 // --- версия и обновления (интернет подменён)
 await E(`localStorage.removeItem('kt-upd');window.__rel=null`); await clickEl('#updBtn'); await sleep(1000);
 ok(/последняя версия/.test(await E(`document.querySelector('#updMenu').textContent`)), 'релизов нет — «У вас последняя версия»');
-await E(`window.__rel={tag_name:'v0.2.0',name:'Контур 0.2',body:'**Текст** и выравнивание',html_url:'x'}`); await clickEl('#updCheck'); await sleep(1000);
-ok(await E(`document.querySelector('#updBtn').classList.contains('new')`) && /Вышла версия 0.2/.test(await E(`document.querySelector('#updMenu').textContent`)), 'новая версия 0.2 — синяя кнопка и «Скачать»');
+await E(`window.__rel={tag_name:'v9.9.0',name:'Контур 9.9',body:'**Текст** и выравнивание',html_url:'x'}`); await clickEl('#updCheck'); await sleep(1000);
+ok(await E(`document.querySelector('#updBtn').classList.contains('new')`) && /Вышла версия 9.9/.test(await E(`document.querySelector('#updMenu').textContent`)), 'новая версия — синяя кнопка и «Скачать»');
 await shot('update'); await E(`window.__net='off'`); await clickEl('#updCheck'); await sleep(1000); ok(/Не удалось проверить/.test(await E(`document.querySelector('#updMenu').textContent`)), 'нет интернета — «Не удалось проверить»');
 await E(`window.__net='';window.__rel=null;localStorage.removeItem('kt-upd');UPD.r=null;UPD.state='idle';renderUpd();closeMenus()`);
 // --- обратная связь (отправка подменена — настоящих сообщений нет)
@@ -244,7 +258,7 @@ await clickEl('#fbBtn'); ok(await E(`document.querySelector('#fbMenu').classList
 await clickEl('#fbMenu [data-fb=bug]'); ok(await E(`document.querySelector('#fbModal').classList.contains('open')&&document.querySelector('#fbType [data-t=bug]').classList.contains('on')`), 'окно отзыва, тип «Ошибка»');
 await clickEl('#fbSend'); ok(/пару слов/.test(await E(`document.querySelector('#fbStatus').textContent`)), 'пустой отзыв не отправляется');
 await E(`document.querySelector('#fbText').value='Проверка формы'`); await E(`window.__f=[]`); await clickEl('#fbSend'); await sleep(300);
-const fb = JSON.parse(await E(`window.__f.find(x=>/feedback/.test(x[0]))[1]`)); ok(fb.text === '[Контур] Проверка формы' && fb.type === 'bug' && /^Контур 0\.1\.0/.test(fb.diag), 'отзыв уходит с пометкой [Контур]: ' + fb.diag);
+const fb = JSON.parse(await E(`window.__f.find(x=>/feedback/.test(x[0]))[1]`)); ok(fb.text === '[Контур] Проверка формы' && fb.type === 'bug' && /^Контур \d+\.\d+\.\d+ бета/.test(fb.diag), 'отзыв уходит с пометкой [Контур]: ' + fb.diag);
 ok(await E(`document.querySelector('#fbForm').classList.contains('sent')`), '«Спасибо!»'); await sleep(2000);
 await E(`window.__fbok=false;openFb('idea');document.querySelector('#fbText').value='ещё'`); await clickEl('#fbSend'); await sleep(300);
 ok(/Telegram-бот/.test(await E(`document.querySelector('#fbStatus').textContent`)) && await E(`document.querySelector('#fbText').value`) === 'ещё', 'ошибка отправки — текст не потерян, есть ссылка на бота');

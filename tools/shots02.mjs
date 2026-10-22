@@ -1,4 +1,4 @@
-// Снимки возможностей «текст, выравнивание, привязка, операции с фигурами»: node tools/shots02.mjs "$PWD/kontur.html" папка-для-снимков
+// Снимки возможностей «текст, выравнивание, привязка, операции с фигурами»: node tools/shots02.mjs "$PWD/web/kontur.html" папка-для-снимков
 import { open, sleep } from './cdp.mjs';
 import { mkdirSync } from 'node:fs';
 const [, , FILE, OUT] = process.argv; mkdirSync(OUT, { recursive: true });

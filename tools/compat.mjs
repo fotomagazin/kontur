@@ -1,6 +1,6 @@
 // Совместимость: проект, собранный и сохранённый СТАРОЙ версией, открывается в НОВОЙ без изменений, и экспорт совпадает байт-в-байт.
 // Запуск из папки 04_Контур:
-//   node tools/compat.mjs <путь к старой версии kontur.html> "$PWD/kontur.html"
+//   node tools/compat.mjs <путь к старой версии kontur.html> "$PWD/web/kontur.html"
 //   (исходный прототип от 05.10.2026 хранится локально: git --git-dir=archive/история-до-публикации.git show b84df30:kontur.html)
 import { open, sleep } from './cdp.mjs';
 import { readdirSync, readFileSync, rmSync, mkdirSync, renameSync } from 'node:fs';

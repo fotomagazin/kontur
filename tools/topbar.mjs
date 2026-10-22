@@ -1,4 +1,4 @@
-// Проверка верхней панели на разной ширине окна: всё ли помещается. node tools/topbar.mjs "$PWD/kontur.html" [new — с кнопкой «Новая версия»]
+// Проверка верхней панели на разной ширине окна: всё ли помещается. node tools/topbar.mjs "$PWD/web/kontur.html" [new — с кнопкой «Новая версия»]
 import { open, sleep } from './cdp.mjs';
 const b = await open({ port: 9491, w: 1440, h: 800 }); await b.go('file://' + process.argv[2]); await sleep(500);
 await b.ev(`(async()=>{AS.time=0;$('#asState').textContent='Автосохранено 19:27';if(${JSON.stringify(process.argv[3]==='new')}){UPD.r={tag:'v0.12.0'};UPD.state='done';renderUpd()}})()`);
