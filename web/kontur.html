@@ -274,6 +274,53 @@ kbd{font:inherit;font-size:11px;padding:1px 6px;border-radius:5px;background:var
 .exsum{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-variant-numeric:tabular-nums}
 .exsum b{font-size:13px}
 .exsum span{color:var(--dim)}
+/* окно «Расчёт плёнки» (только в программах для Mac и Windows) */
+#calcBtn[hidden]{display:none}
+.ca{width:min(940px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto}
+.ca-g{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px}
+.ca-l,.ca-r{display:flex;flex-direction:column;gap:6px;min-width:0}
+.ca h4{margin:8px 0 2px;font-size:11px;font-weight:650;letter-spacing:.07em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ca h4:first-child{margin-top:0}
+.ca h4 select{text-transform:none;letter-spacing:0;font-weight:500;height:24px}
+.ca .exr{display:grid;grid-template-columns:128px 1fr;align-items:center;gap:10px;min-height:30px}
+.ca .exr>span:first-child{color:var(--dim)}
+.ca .exr[hidden]{display:none}
+.ca .wh{display:flex;align-items:center;gap:6px;color:var(--dim)}
+.ca .wh input{width:84px;height:28px}
+.ca .wh select{height:28px}
+.ca .seg{justify-self:start}
+.ca .seg button{height:26px;padding:0 12px}
+.ca-ck{display:flex;align-items:center;gap:8px;color:var(--dim);min-height:28px;cursor:pointer}
+.ca-sub{margin:-6px 0 0;color:var(--dim);font-size:12px;line-height:1.45}
+.ca-t{display:grid;grid-template-columns:1fr auto auto;gap:5px 14px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.ca-t span{color:var(--dim)}
+.ca-t b{font-weight:600;text-align:right;white-space:nowrap}
+.ca-t i{font-style:normal;color:var(--faint);text-align:right;white-space:nowrap}
+.ca-t .hd{font-size:10.5px;color:var(--faint);text-align:right}
+#caPrev{height:330px;border-radius:12px;background:#0b0b0e;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;color:var(--faint);font-size:12px;text-align:center;padding:10px}
+#caPrev svg{width:100%;height:100%;display:block}
+.ca-res{display:grid;grid-template-columns:1fr auto;gap:5px 12px;padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.ca-res span{color:var(--dim)}
+.ca-res b{text-align:right;font-weight:600;white-space:nowrap}
+.ca-res .ln{grid-column:1/-1;height:1px;background:var(--line2);margin:3px 0}
+.ca-res .tot{font-size:15px;color:#fff}
+.ca-res .bad{color:#ffb070}
+.ca-res .mu{grid-column:1/-1;color:var(--faint);font-size:11.5px;line-height:1.45}
+.ca-g[hidden],.ca-t2[hidden],.ca .dlg-f button[hidden]{display:none}
+.ca-tabs{margin:0 auto 0 18px}
+.dlg-h .ca-tabs button{width:auto;height:26px;padding:0 12px;white-space:nowrap;color:var(--text)}
+.ca{overflow:hidden}
+.ca-g,.ca-t2{overflow:auto;min-height:0;padding-right:4px}
+.ca-t2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ca-card{padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.ca-card h4{margin:0}
+.ca-card .mu{margin:0 0 4px;color:var(--faint);font-size:11.5px;line-height:1.45}
+.ca-act{display:flex;justify-content:flex-end;gap:8px;margin-top:auto;padding-top:6px}
+.ca-act button{background:var(--raised);border-color:var(--line)}
+.ca-act button.on{background:var(--acc);border-color:var(--acc)}
+.ca-rep{padding:8px 10px;border-radius:9px;background:rgba(255,255,255,.04);color:var(--dim);font-size:12px;line-height:1.5;min-height:34px}
+.ca-rep b{color:var(--text)}
+@media(max-width:760px){.ca-g,.ca-t2{grid-template-columns:1fr}}
 /* пустая страница: подсказка, с чего начать; карточка «незаконченная работа» */
 #empty{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(440px,calc(100% - 40px));pointer-events:none;
   display:flex;flex-direction:column;align-items:center;gap:6px;padding:26px 28px 22px;border-radius:18px;text-align:center;
@@ -328,9 +375,9 @@ kbd{font:inherit;font-size:11px;padding:1px 6px;border-radius:5px;background:var
 /* ---- узкое окно: прячем подписи, остаются иконки ---- */
 @media (max-width:1980px){#saveAsBtn,#histBtn,#snapBtn{font-size:0;gap:0;width:30px;padding:0}#histBtn{width:40px}}
 @media (max-width:1720px){#importBtn,#qrBtn{font-size:0;gap:0;width:30px;padding:0}.upd .vw{display:none}.pl i{display:none}}
-@media (max-width:1500px){.brand{font-size:0;gap:0;margin-right:6px}}
+@media (max-width:1500px){.brand{font-size:0;gap:0;margin-right:6px}#fbBtn{font-size:0;gap:0;width:40px;padding:0}}
 @media (max-width:1400px){.as{display:none}}
-@media (max-width:1300px){#newBtn,#openBtn,#expBtn,#fbBtn,#fitBtn{font-size:0;gap:0;width:30px;padding:0}#fbBtn{width:40px}#top .sep{margin:0 3px}.as{display:none}}
+@media (max-width:1300px){#newBtn,#openBtn,#expBtn,#calcBtn,#fbBtn,#fitBtn{font-size:0;gap:0;width:30px;padding:0}#fbBtn{width:40px}#top .sep{margin:0 3px}.as{display:none}}
 @media (max-width:1060px){#bot .pl{display:none}}
 @media (max-width:940px){#betaTag{display:none}}
 </style></head><body>
@@ -346,6 +393,7 @@ kbd{font:inherit;font-size:11px;padding:1px 6px;border-radius:5px;background:var
   <button id="importBtn" data-a="import" data-i="download" title="Импорт — взять в рисунок: фото, логотип, PDF или файл Illustrator (.ai) — кривыми (Ctrl+I). Можно перетащить файл в окно или вставить Ctrl+V">Импорт</button>
   <button id="qrBtn" data-a="qr" data-i="qr" title="Генератор QR-кода (Q)">QR-код</button>
   <button id="expBtn" data-i="export" title="Экспорт — отдать рисунок наружу: SVG, PDF, EPS, DXF или PNG (Ctrl+E)">Экспорт</button>
+  <button id="calcBtn" data-i="ruler" hidden title="Расчёт плёнки: длина реза, площадь, раскладка на рулоне или листе, тираж и стоимость">Расчёт</button>
   <div class="sep"></div>
   <button id="undoBtn" class="icon" data-a="undo" data-i="undo" title="Отменить (Ctrl+Z)"></button><button id="redoBtn" class="icon" data-a="redo" data-i="redo" title="Вернуть (Ctrl+Shift+Z или Ctrl+Y)"></button>
   <button id="histBtn" class="dd" data-i="history" title="История: все шаги, к любому можно вернуться">История</button>
@@ -408,6 +456,68 @@ kbd{font:inherit;font-size:11px;padding:1px 6px;border-radius:5px;background:var
   <div class="dlg-f"><span></span><button type="button" id="exCancel">Отмена</button><button type="button" class="on" id="exGo">Сохранить</button></div>
  </div>
 </div>
+<div id="caModal" class="modal">
+ <div class="dlg ca" role="dialog" aria-label="Расчёт плёнки">
+  <div class="dlg-h"><b>Расчёт плёнки</b><span class="seg ca-tabs" id="caTabs"><button type="button" data-v="1">Расчёт и раскладка</button><button type="button" data-v="2">Подготовка к резке</button></span><button type="button" class="icon" id="caClose" data-i="close" title="Закрыть (Esc)"></button></div>
+  <div class="ca-sub" id="caWhat"></div>
+  <div class="ca-g" id="caT1">
+   <div class="ca-l">
+    <h4>Замеры<select id="caU" title="Единицы замеров"><option value="mm">мм</option><option value="cm">см</option><option value="m">м</option></select></h4>
+    <div class="ca-t" id="caMeas"></div>
+    <h4>Раскладка на плёнке</h4>
+    <div class="exr"><span>Материал</span><span class="seg" id="caMode"><button type="button" data-v="roll">Рулон</button><button type="button" data-v="sheet">Лист</button></span></div>
+    <div class="exr" id="caRollRow"><span>Ширина рулона</span><span class="wh"><input type="number" id="caRw" list="caRwL" min="20" step="10"> мм</span></div>
+    <datalist id="caRwL"><option value="610"><option value="1000"><option value="1060"><option value="1220"><option value="1260"><option value="1370"><option value="1520"></datalist>
+    <div class="exr" id="caSheetRow"><span>Размер листа</span><span class="wh"><input type="number" id="caSw" min="20" step="10"> × <input type="number" id="caSh" min="20" step="10"> мм</span></div>
+    <div class="exr"><span>Отступ от края</span><span class="wh"><input type="number" id="caMg" min="0" step="1"> мм</span></div>
+    <div class="exr"><span>Между деталями</span><span class="wh"><input type="number" id="caGap" min="0" step="0.5"> мм</span></div>
+    <div class="exr"><span>Тираж</span><span class="wh"><input type="number" id="caN" min="1" max="999" step="1"> шт. каждой детали</span></div>
+    <div class="exr"><span>Поворот деталей</span><span class="wh"><select id="caRot"><option value="0">Не поворачивать</option><option value="90">На 90° и 180°</option><option value="15">На любой угол (через 15°)</option></select></span></div>
+    <div class="exr"><span id="caDirL">Рулон на странице</span><span class="seg" id="caDir"><button type="button" data-v="h">Вправо →</button><button type="button" data-v="v">Вниз ↓</button></span></div>
+    <label class="ca-ck"><input type="checkbox" id="caNest"> Мелкие детали можно класть в дырки крупных (внутрь «О», «А»…)</label>
+    <div class="exr"><span>Выборка</span><span class="wh"><select id="caWeed" title="Рамка и линии выборки появятся при «Разложить на странице» и войдут в длину реза и стоимость"><option value="none">Без рамки и линий</option><option value="frame">Рамка вокруг раскладки</option><option value="cross">Рамка + линии поперёк плёнки</option><option value="grid">Рамка + сетка линий</option></select></span></div>
+    <h4>Резка и время</h4>
+    <div class="exr"><span>Скорость резки</span><span class="wh"><input type="number" id="caV" min="1" step="1"> см/с</span></div>
+    <div class="exr"><span>Врезка ножа</span><span class="wh"><input type="number" id="caTp" min="0" step="0.1"> с на каждый контур</span></div>
+    <h4>Стоимость</h4>
+    <div class="exr"><span>Плёнка</span><span class="wh"><input type="number" id="caPf" min="0" step="any"> ₽ за <select id="caPfu"></select></span></div>
+    <div class="exr"><span>Резка</span><span class="wh"><input type="number" id="caPc" min="0" step="any"> ₽ за 1 м реза</span></div>
+    <div class="exr"><span>Врезки</span><span class="wh"><input type="number" id="caPp" min="0" step="any"> ₽ за штуку</span></div>
+    <div class="exr"><span>Работа плоттера</span><span class="wh"><input type="number" id="caPh" min="0" step="any"> ₽ за час</span></div>
+    <div class="exr"><span>Наценка</span><span class="wh"><input type="number" id="caMk" min="0" step="1"> %</span></div>
+    <div class="exr"><span>Минимум заказа</span><span class="wh"><input type="number" id="caMin" min="0" step="any"> ₽</span></div>
+   </div>
+   <div class="ca-r">
+    <div id="caPrev"></div>
+    <div class="ca-res" id="caRes"></div>
+   </div>
+  </div>
+  <div class="ca-t2" id="caT2" hidden>
+   <div class="ca-card"><h4>Контур с отступом</h4><p class="mu">Обводка вокруг деталей на заданном расстоянии: подложка наклейки, окантовка надписи другим цветом, контур для резки. Появится отдельной кривой под деталями.</p>
+    <div class="exr"><span>Отступ</span><span class="wh"><input type="number" id="caOff" min="0.1" step="0.5"> мм</span></div>
+    <div class="exr"><span>Куда</span><span class="seg" id="caOffDir"><button type="button" data-v="out">Наружу</button><button type="button" data-v="in">Внутрь</button></span></div>
+    <div class="exr"><span>Углы</span><span class="seg" id="caOffJ"><button type="button" data-v="round">Скруглённые</button><button type="button" data-v="miter">Острые</button></span></div>
+    <label class="ca-ck"><input type="checkbox" id="caOffAll"> Один общий контур для всех деталей</label>
+    <label class="ca-ck"><input type="checkbox" id="caOffFill"> Без дырок — сплошная подложка</label>
+    <div class="ca-act"><button type="button" class="on" id="caOffGo">Создать контур</button></div></div>
+   <div class="ca-card"><h4>Рамка и линии выборки</h4><p class="mu">Рамка вокруг деталей и линии в промежутках между ними: после резки лишняя плёнка снимается полосами, мелкие буквы не отрываются. Линии не задевают детали.</p>
+    <div class="exr"><span>Отступ рамки</span><span class="wh"><input type="number" id="caWOff" min="0" step="0.5"> мм</span></div>
+    <div class="exr"><span>Линии</span><span class="wh"><select id="caWMode"><option value="frame">Только рамка</option><option value="h">Рамка + горизонтальные</option><option value="v">Рамка + вертикальные</option><option value="grid">Рамка + сетка</option></select></span></div>
+    <div class="ca-act"><button type="button" class="on" id="caWGo">Добавить выборку</button></div></div>
+   <div class="ca-card"><h4>Тираж заполнением</h4><p class="mu">Копии выделенного (одним блоком) ровными рядами по странице — например, сто одинаковых наклеек. Если не поместятся, страница удлинится.</p>
+    <div class="exr"><span>Количество</span><span class="wh"><input type="number" id="caFN" min="0" step="1"> шт. (0 — сколько поместится)</span></div>
+    <div class="exr"><span>Между копиями</span><span class="wh"><input type="number" id="caFGap" min="0" step="0.5"> мм</span></div>
+    <div class="exr"><span>Отступ от края</span><span class="wh"><input type="number" id="caFMg" min="0" step="1"> мм</span></div>
+    <label class="ca-ck"><input type="checkbox" id="caFChess"> Шахматкой — каждый второй ряд сдвинут на полкопии</label>
+    <label class="ca-ck"><input type="checkbox" id="caFShare"> Общий рез без зазора (прямоугольные наклейки: соседи режутся одной линией)</label>
+    <div class="ca-act"><button type="button" class="on" id="caFGo">Заполнить страницу</button></div></div>
+   <div class="ca-card"><h4>Чистка макета</h4><p class="mu">Двойные контуры режутся дважды и рвут плёнку, разорванные контуры не считаются деталями. Проверяются выделенные кривые (ничего не выделено — все); надписи не трогаются.</p>
+    <div class="ca-rep" id="caCleanRep">Нажмите «Проверить».</div>
+    <div class="ca-act"><button type="button" id="caCleanFind">Проверить</button><button type="button" class="on" id="caCleanGo">Исправить</button></div></div>
+  </div>
+  <div class="dlg-f"><span id="caState"></span><button type="button" id="caMore" title="Перебрать больше вариантов раскладки (до 8 секунд) — иногда плёнки уходит меньше">Искать плотнее</button><button type="button" id="caCancel">Закрыть</button><button type="button" class="on" id="caGo" title="Разложить детали на странице так, как на картинке; страница станет размером с кусок плёнки. Отменить — Ctrl+Z">Разложить на странице</button></div>
+ </div>
+</div>
 <div id="qrm" hidden><div class="qrbox">
  <div><h3><span data-i="qr"></span>QR-код</h3>
   <label>Что закодировать<select id="qrType"></select></label>
@@ -430,7 +540,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
 </script>
 <script>
 const $=s=>document.querySelector(s), svg=$('#cv'), W=$('#world'), OV=$('#ov');
-const APP_BUILD='0.2.0';   // номер этой версии — совпадает с тегом релиза на GitHub (v0.2.0)
+const APP_BUILD='0.3.0';   // номер этой версии — совпадает с тегом релиза на GitHub (v0.3.0)
 const APP_VERSION=APP_BUILD+' бета';
 const REPO='fotomagazin/kontur';   // репозиторий с релизами Контура на GitHub
 // отзывы — на сервер бота Фотомагазина (общий для семейства), приходят автору с пометкой [Контур]
@@ -500,6 +610,7 @@ const ICONS={
  check:'<path d="M20 6 9 17l-5-5"/>',
  magnet:'<path d="m6 15-4-4 6.75-6.77a7.79 7.79 0 0 1 11 11L13 22l-4-4 6.39-6.36a2.14 2.14 0 0 0-3-3L6 15M5 8l4 4M12 15l4 4"/>',
  grid:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>',
+ ruler:'<path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2M11.5 9.5l2-2M8.5 6.5l2-2M17.5 15.5l2-2"/>',
  aL:'<rect width="9" height="6" x="6" y="14" rx="2"/><rect width="16" height="6" x="6" y="4" rx="2"/><path d="M2 2v20"/>',
  aCH:'<path d="M12 2v20M8 10H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h4M16 10h4a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-4M8 20H7a2 2 0 0 1-2-2v-2c0-1.1.9-2 2-2h1M16 14h1a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-1"/>',
  aR:'<rect width="16" height="6" x="2" y="4" rx="2"/><rect width="9" height="6" x="9" y="14" rx="2"/><path d="M22 22V2"/>',
@@ -1298,6 +1409,262 @@ $('#qrm').addEventListener('input',e=>{if(e.target.id==='qrType'){Q.type=e.targe
 $('#qrm').addEventListener('change',()=>qrUpdate());
 $('#qrCancel').onclick=qrClose;$('#qrX').onclick=qrClose;$('#qrOk').onclick=qrApply;
 
+/* ---------- расчёт плёнки (кнопка «Расчёт» — только в программах для Mac и Windows): длина реза, площади, раскладка деталей
+   на рулоне или листах, тираж, стоимость. Деталь — кривая или надпись целиком. Раскладка «по форме»: деталь рисуется маской из клеток
+   (~1 мм), раздутой на половину зазора, и ставится как можно ближе к началу плёнки; при «вложениях» дырки букв в маске свободны —
+   туда встают мелкие детали. Клетка маски закрашена, если её хоть чуть задело — поэтому зазор и отступ не меньше заданных ---------- */
+const CA={mode:'roll',rw:1220,sw:1000,sh:1400,dir:'h',mg:10,gap:3,n:1,rot:'90',nest:true,u:'m',pf:0,pfu:'m2',pc:0,
+ weed:'none',v:40,tp:.3,pp:0,ph:0,mk:0,min:0,tab:'1',   // выборка при раскладке; скорость ножа (см/с — у Roland по умолчанию 40), врезка (с); цены: врезка, час, наценка %, минимум
+ off:2,offIn:false,offJ:'round',offAll:true,offFill:false,wOff:2,wMode:'h',fN:0,fGap:3,fMg:5,fChess:false,fShare:false};   // вкладка «Подготовка к резке»
+try{const v=JSON.parse(localStorage['kt-calc']||'{}');for(const k in CA)if(typeof v[k]===typeof CA[k])CA[k]=v[k]}catch(e){}
+let caObjs=[],caMs=null,caRes=null,caTok=0,caMasks=new Map(),caTimer=0,caBusy=false,caMoreOn=false,caLastKey=null;
+const caKey=()=>JSON.stringify([CA.mode,CA.rw,CA.sw,CA.sh,CA.dir,CA.mg,CA.gap,CA.n,CA.rot,CA.nest]);
+const caNum=(v,d)=>(+v).toLocaleString('ru-RU',{maximumFractionDigits:d,minimumFractionDigits:0});
+const caPl=(n,a,b,c)=>{const m=n%100,k=n%10;return m>10&&m<20?c:k===1?a:k>1&&k<5?b:c};
+const caL=mm=>CA.u==='m'?caNum(mm/1000,3)+' м':CA.u==='cm'?caNum(mm/10,1)+' см':caNum(mm,1)+' мм';
+const CLIPPER=[...(NATIVE?['vendor/libs/clipper.js']:[]),'https://cdn.jsdelivr.net/npm/clipper-lib@6.4.2/clipper.js','https://unpkg.com/clipper-lib@6.4.2/clipper.js'];
+const caT=sec=>{sec=Math.round(sec);return sec<60?sec+' с':sec<3600?Math.floor(sec/60)+' мин'+(sec%60?' '+sec%60+' с':''):Math.floor(sec/3600)+' ч '+Math.round(sec%3600/60)+' мин'};
+const caA=mm2=>{if(CA.u==='m'){const v=mm2/1e6;return caNum(v,v<.1?4:3)+' м²'}return CA.u==='cm'?caNum(mm2/100,1)+' см²':caNum(mm2,0)+' мм²'};
+/* кривая → ломаная (для длины, площади и маски) */
+function flatSp(sp){const r=[];if(!sp.n.length)return{c:!!sp.c,p:r};r.push({x:sp.n[0].x,y:sp.n[0].y});
+ for(const[p,q]of segs(sp)){if(isLine(p,q)){r.push({x:q.x,y:q.y});continue}const P=segPts(p,q),k=Math.max(4,Math.min(64,Math.ceil((dist(P[0],P[1])+dist(P[1],P[2])+dist(P[2],P[3]))/.4)));for(let i=1;i<=k;i++)r.push(bez(P,i/k))}
+ if(sp.c&&r.length>1)r.pop();return{c:!!sp.c,p:r}}
+const polyA=p=>{let a=0;for(let i=0,j=p.length-1;i<p.length;j=i++)a+=(p[j].x+p[i].x)*(p[j].y-p[i].y);return a/2};
+function inPoly(t,p){let r=false;for(let i=0,j=p.length-1;i<p.length;j=i++){const a=p[i],b=p[j];if((a.y>t.y)!==(b.y>t.y)&&t.x<(b.x-a.x)*(t.y-a.y)/(b.y-a.y)+a.x)r=!r}return r}
+/* замеры детали: per — длина реза, net — площадь плёнки (дырки вычтены, как при заливке «чёт-нечет»), out — по внешнему краю, hole — дырки */
+function measure(o){const ps=o.sp.map(flatSp).filter(s=>s.p.length>1),cl=ps.filter(s=>s.c&&s.p.length>2);let per=0,net=0,out=0;
+ for(const s of ps){for(let i=1;i<s.p.length;i++)per+=dist(s.p[i-1],s.p[i]);if(s.c)per+=dist(s.p[s.p.length-1],s.p[0])}
+ for(const s of cl){const A=Math.abs(polyA(s.p)),m=lerp(s.p[0],s.p[1],.5);let d=0;for(const t of cl)if(t!==s&&inPoly(m,t.p))d++;net+=d%2?-A:A;if(!d)out+=A}
+ return{per,net:Math.max(0,net),out,hole:Math.max(0,out-net),pc:ps.length}}
+function caPick(){const all=(sel.length?selObjs():S.objects).filter(o=>!o.hid),ps=all.filter(o=>o.type==='path'&&!o.lock&&o.sp.some(s=>s.n.length>1));return{ps,skip:all.length-ps.length}}
+/* как плёнка лежит на странице: across — ширина рулона/листа поперёк раскладки, along — длина листа (у рулона — без конца),
+   phi — плёнка идёт вправо: оси раскладки меняются местами (x↔y), детали раскладываются «зеркально» и при переносе на страницу
+   зеркалятся обратно — поэтому не переворачиваются, а раскладка начинается от верхнего левого угла */
+function caGeo(){const h=CA.dir==='h';return CA.mode==='roll'?{across:CA.rw,along:Infinity,phi:h?90:0}:{across:h?CA.sh:CA.sw,along:h?CA.sw:CA.sh,phi:h?90:0}}
+function openCalc(){finishPen();closeMenus();const{ps,skip}=caPick();
+ if(!ps.length){note(S.objects.length?'Нечего считать: выделите кривые или надписи (фото и закреплённые объекты не считаются)':'Нечего считать: нарисуйте или импортируйте кривые и надписи');return}
+ caObjs=ps;caMs=ps.map(measure);caMs.box=boxOf2(ps);caRes=null;caLastKey=null;caMasks=new Map();
+ $('#caWhat').textContent=(sel.length?'Выделено':'Все объекты')+': '+ps.length+' '+caPl(ps.length,'деталь','детали','деталей')+' (деталь — кривая или надпись целиком)'+(skip?' · не считаются фото, закреплённые и пустые: '+skip:'');
+ $('#caU').value=CA.u;$('#caRw').value=CA.rw;$('#caSw').value=CA.sw;$('#caSh').value=CA.sh;$('#caMg').value=CA.mg;$('#caGap').value=CA.gap;$('#caN').value=CA.n;$('#caRot').value=CA.rot;$('#caNest').checked=CA.nest;$('#caPf').value=CA.pf||'';$('#caPc').value=CA.pc||'';
+ $('#caWeed').value=CA.weed;$('#caV').value=CA.v;$('#caTp').value=CA.tp;$('#caPp').value=CA.pp||'';$('#caPh').value=CA.ph||'';$('#caMk').value=CA.mk||'';$('#caMin').value=CA.min||'';
+ $('#caOff').value=CA.off;$('#caOffAll').checked=CA.offAll;$('#caOffFill').checked=CA.offFill;$('#caWOff').value=CA.wOff;$('#caWMode').value=CA.wMode;
+ $('#caFN').value=CA.fN;$('#caFGap').value=CA.fGap;$('#caFMg').value=CA.fMg;$('#caFChess').checked=CA.fChess;$('#caFShare').checked=CA.fShare;$('#caCleanRep').textContent='Нажмите «Проверить».';
+ $('#caModal').classList.add('open');caPreview();caChanged()}
+function closeCalc(){caTok++;caBusy=caMoreOn=false;clearTimeout(caTimer);$('#caModal').classList.remove('open')}
+function caRead(){const v=(id,lo,hi,d)=>{const x=parseFloat(String($(id).value).replace(',','.'));return isFinite(x)?Math.min(hi,Math.max(lo,x)):d};
+ CA.rw=v('#caRw',20,10000,1220);CA.sw=v('#caSw',20,10000,1000);CA.sh=v('#caSh',20,10000,1400);CA.mg=v('#caMg',0,500,0);CA.gap=v('#caGap',0,200,0);CA.n=Math.round(v('#caN',1,999,1));
+ CA.rot=$('#caRot').value;CA.nest=$('#caNest').checked;CA.u=$('#caU').value;CA.pf=v('#caPf',0,1e9,0);CA.pc=v('#caPc',0,1e9,0);if($('#caPfu').value)CA.pfu=$('#caPfu').value;
+ CA.weed=$('#caWeed').value;CA.v=v('#caV',1,1000,40);CA.tp=v('#caTp',0,60,0);CA.pp=v('#caPp',0,1e9,0);CA.ph=v('#caPh',0,1e9,0);CA.mk=v('#caMk',0,1000,0);CA.min=v('#caMin',0,1e9,0);
+ CA.off=v('#caOff',.01,1000,2);CA.offAll=$('#caOffAll').checked;CA.offFill=$('#caOffFill').checked;CA.wOff=v('#caWOff',0,1000,2);CA.wMode=$('#caWMode').value;
+ CA.fN=Math.round(v('#caFN',0,100000,0));CA.fGap=v('#caFGap',0,1000,0);CA.fMg=v('#caFMg',0,1000,0);CA.fChess=$('#caFChess').checked;CA.fShare=$('#caFShare').checked}
+function caChanged(){caRead();
+ const t2=CA.tab==='2',on=(id,f)=>document.querySelectorAll(id+' button').forEach(b=>b.classList.toggle('on',f(b.dataset.v)));
+ on('#caTabs',v=>v===CA.tab);on('#caOffDir',v=>(v==='in')===CA.offIn);on('#caOffJ',v=>v===CA.offJ);
+ $('#caT1').hidden=t2;$('#caT2').hidden=!t2;$('#caMore').hidden=$('#caGo').hidden=t2;
+ document.querySelectorAll('#caMode button').forEach(b=>b.classList.toggle('on',b.dataset.v===CA.mode));document.querySelectorAll('#caDir button').forEach(b=>b.classList.toggle('on',b.dataset.v===CA.dir));
+ $('#caRollRow').hidden=CA.mode!=='roll';$('#caSheetRow').hidden=CA.mode==='roll';$('#caDirL').textContent=CA.mode==='roll'?'Рулон на странице':'Листы на странице';
+ const U=CA.mode==='roll'?[['m2','м²'],['lm','пог. м']]:[['m2','м²'],['sheet','лист']];if(!U.some(u=>u[0]===CA.pfu))CA.pfu='m2';
+ $('#caPfu').innerHTML=U.map(([v,t])=>`<option value="${v}"${v===CA.pfu?' selected':''}>${t}</option>`).join('');
+ try{localStorage['kt-calc']=JSON.stringify(CA)}catch(e){}
+ caMeasUI();if(caKey()!==caLastKey){caLastKey=caKey();caTok++;caBusy=true;caMoreOn=false;clearTimeout(caTimer);caTimer=setTimeout(()=>caLayout(false),250)}caResUI();caState()}
+function caMeasUI(){const M=caMs,n=CA.n,t=n>1,sum=k=>M.reduce((a,m)=>a+m[k],0),B=M.box;
+ const row=(nm,v,f,tip)=>`<span title="${tip}">${nm}</span><b>${f(v)}</b><i>${t?f(v*n):''}</i>`;
+ $('#caMeas').innerHTML=(t?`<span></span><span class="hd">1 комплект</span><span class="hd">× ${n} шт.</span>`:'')
+  +row('Длина реза (периметр)',sum('per'),caL,'Сумма длин всех контуров, вместе с дырками букв, — столько пройдёт нож плоттера')
+  +row('Врезок (контуров)',sum('pc'),v=>caNum(v,0),'Сколько раз нож опустится в плёнку: каждый отдельный контур, включая дырки букв')
+  +row('Площадь деталей',sum('net'),caA,'Сама плёнка деталей: дырки (внутри «О», «А») вычтены')
+  +row('Площадь по внешнему краю',sum('out'),caA,'Как если бы дырки были заклеены')
+  +row('Площадь дырок',sum('hole'),caA,'Внутренние вырезы деталей')
+  +row(`Габарит ${caNum(B.w,1)} × ${caNum(B.h,1)} мм`,B.w*B.h,caA,'Прямоугольник, в который вписаны все детали вместе — как они стоят сейчас')}
+/* маска детали под углом ang: runs — тройки [строка, от, до] закрашенных клеток; m — левый верхний угол повёрнутой детали, c0 — центр поворота */
+function caMask(o,ang,c,hl,phi){const key=o.id+'|'+ang;let M=caMasks.get(key);if(M)return M;
+ const B=objBox(o),c0={x:B.x+B.w/2,y:B.y+B.h/2},r=ang*Math.PI/180,cs=Math.cos(r),sn=Math.sin(r);
+ const ps=o.sp.map(flatSp).filter(s=>s.p.length).map(s=>({c:s.c,p:s.p.map(q=>{const x=q.x-c0.x,y=q.y-c0.y,a=x*cs-y*sn,b=x*sn+y*cs;return phi?{x:b,y:a}:{x:a,y:b}})})),bb=boxOf(ps.flatMap(s=>s.p));
+ const w=Math.ceil((bb.w+2*hl)/c)+1,h=Math.ceil((bb.h+2*hl)/c)+1,cv=cvs(w,h),x=cv.getContext('2d',{willReadFrequently:true});
+ x.setTransform(1/c,0,0,1/c,(hl-bb.x)/c,(hl-bb.y)/c);x.fillStyle=x.strokeStyle='#000';x.lineJoin=x.lineCap='round';x.lineWidth=Math.max(2*hl,c*.1);
+ const line=s=>{x.moveTo(s.p[0].x,s.p[0].y);for(let i=1;i<s.p.length;i++)x.lineTo(s.p[i].x,s.p[i].y);if(s.c)x.closePath()};
+ if(CA.nest){x.beginPath();ps.filter(s=>s.c).forEach(line);x.fill('evenodd')}else for(const s of ps)if(s.c){x.beginPath();line(s);x.fill()}
+ x.beginPath();ps.forEach(line);x.stroke();
+ const d=x.getImageData(0,0,w,h).data,R=[];let cells=0;
+ const lr=new Int32Array(h);let jw=0;
+ for(let j=0;j<h;j++){let a=-1;for(let i=0;i<=w;i++){const on=i<w&&d[(j*w+i)*4+3]>0;if(on&&a<0)a=i;else if(!on&&a>=0){R.push(j,a,i-1);cells+=i-a;lr[j]=Math.max(lr[j],i-a);a=-1}}if(lr[j]>lr[jw])jw=j}
+ M={key,w,h,runs:Int32Array.from(R),lr,jw,cells,m:{x:bb.x,y:bb.y},bh:bb.h,c0,ang};caMasks.set(key,M);return M}
+/* полоса плёнки клетками: rows[y][x] — сколько свободных клеток подряд вправо от x (0 — занято), mx[y] — самый длинный свободный кусок строки;
+   строки без деталей не хранятся. Строку, где свободного места меньше самой широкой строки маски, пропускаем сразу — так быстро */
+function caFind(g,M,st,bound,G,R){const u=M.runs,lr=M.lr,jw=M.jw,mx=g.mx;
+ for(let Y=st?st.Y:0;;Y++){if(Y+M.h>R||Y+M.h>=bound)return null;
+  const q=mx[Y+jw];if(q!==undefined&&q<lr[jw])continue;
+  let fits=true;for(let j=0;j<M.h;j++){const m=mx[Y+j];if(m!==undefined&&m<lr[j]){fits=false;break}}if(!fits)continue;
+  let X=st&&Y===st.Y?st.X:0;
+  while(X+M.w<=G){let nx=-1;for(let i=0;i<u.length;i+=3){const a=u[i+1],r=g.rows[Y+u[i]],k=r?r[X+a]:G-X-a;if(k<u[i+2]-a+1){nx=X+k+1;break}}if(nx<0)return{X,Y};X=nx}}}
+function caPut(g,M,X,Y,G){const u=M.runs;for(let i=0;i<u.length;i+=3){const y=Y+u[i];let r=g.rows[y];if(!r){r=g.rows[y]=new Uint16Array(G);for(let x=0;x<G;x++)r[x]=G-x}
+ const a=X+u[i+1],b=X+u[i+2];for(let x=a;x<=b;x++)r[x]=0;for(let x=a-1;x>=0&&r[x];x--)r[x]=r[x+1]+1;let m=0;for(let x=0;x<G;x++)if(r[x]>m)m=r[x];g.mx[y]=m}g.top=Math.max(g.top,Y+M.h)}
+/* одна раскладка в заданном порядке: каждая деталь — в самое раннее место (по всем поворотам), у листов — на первый лист, где помещается */
+async function caNest(ord,cfg,alive){const{G,R,c,geo,mg}=cfg,grids=[],res=[],fail=[],last=new Map(),mkG=()=>grids.push({rows:[],mx:[],top:0});mkG();
+ for(const it of ord){let best=null;
+  const tryG=gi=>{for(const M of it.Ms){if(M.w>G||M.h>R)continue;const lk=M.key+'|'+gi,p=caFind(grids[gi],M,last.get(lk),best?best.s:Infinity,G,R);if(p){last.set(lk,p);const s=p.Y+M.h;if(!best||s<best.s||s===best.s&&p.X<best.X)best={s,X:p.X,Y:p.Y,M,gi}}}};
+  for(let gi=0;gi<grids.length&&!best;gi++)tryG(gi);
+  if(!best&&R!==Infinity&&it.Ms.some(M=>M.w<=G&&M.h<=R)){mkG();tryG(grids.length-1)}
+  if(!best){fail.push(it);continue}
+  caPut(grids[best.gi],best.M,best.X,best.Y,G);res.push({it,M:best.M,X:best.X,Y:best.Y,gi:best.gi});if(!await alive())return null}
+ let len=0,top=0;const sheets=res.length?Math.max(...res.map(p=>p.gi))+1:0;
+ for(const p of res){len=Math.max(len,mg+p.Y*c+p.M.bh);if(p.gi===sheets-1)top=Math.max(top,p.Y+p.M.h)}
+ return{res,fail,sheets,len:res.length?len+mg:0,score:fail.length*1e12+(R===Infinity?len:sheets*1e9+top),cfg}}
+async function caLayout(more){const tok=++caTok;caBusy=true;caMoreOn=more;caState();const geo=caGeo(),mg=CA.mg,Wu=geo.across-2*mg;
+ if(Wu<=0){caRes={err:'Отступы от края больше ширины плёнки',k:caKey()};caBusy=caMoreOn=false;caPreview();caResUI();caState();return}
+ const dmin=Math.min(...caObjs.map(o=>{const B=objBox(o);return Math.max(.5,Math.min(B.w,B.h))}));
+ const c=Math.min(2.5,Math.max(Wu/3000,.15,Math.min(Wu/900,Math.max(CA.gap,.5)/2,dmin/5))),hl=CA.gap/2+.05,mk=JSON.stringify([c,hl,CA.nest,geo.phi]);
+ if(caMasks.k!==mk){caMasks=new Map();caMasks.k=mk}
+ let t0=performance.now();const alive=async()=>{if(performance.now()-t0>30){await new Promise(r=>setTimeout(r));t0=performance.now()}return tok===caTok};
+ const angs=CA.rot==='0'?[0]:CA.rot==='90'?[0,90,180,270]:Array.from({length:24},(_,i)=>i*15),parts=[];
+ for(const o of caObjs){const Ms=[];for(const a of angs){Ms.push(caMask(o,a,c,hl,geo.phi));if(!await alive())return}for(let k=0;k<CA.n;k++)parts.push({o,k,Ms})}
+ const cfg={G:Math.floor((Wu+2*hl)/c),R:geo.along===Infinity?Infinity:Math.floor((geo.along-2*mg+2*hl)/c),c,geo,mg},key=caKey();
+ const by=f=>(a,b)=>f(b)-f(a)||a.k-b.k,orders=[by(p=>p.Ms[0].cells),by(p=>Math.max(p.Ms[0].w,p.Ms[0].h)),by(p=>p.Ms[0].h*1e4+p.Ms[0].w)];
+ let best=caRes&&caRes.k===key&&!caRes.err?caRes:null,tries=0;const end=performance.now()+(more?8000:1500);
+ for(let i=more?orders.length:0;;i++){const ord=i<orders.length?parts.slice().sort(orders[i]):parts.map(p=>[p,p.Ms[0].cells*(.5+Math.random())]).sort((a,b)=>b[1]-a[1]).map(a=>a[0]);
+  const r=await caNest(ord,cfg,alive);if(!r)return;tries++;
+  if(!best||r.score<best.score-1e-6){best=r;best.k=key;caRes=best;caPreview();caResUI()}
+  if(performance.now()>end||!more&&i>=orders.length-1)break}
+ caBusy=caMoreOn=false;caState(more?'Перебрано вариантов: '+tries+' — показан лучший':'')}
+/* куда переносится точка детали q (в документе) при раскладке p */
+function caF(p,cfg){const{c,geo,mg}=cfg,M=p.M,r=M.ang*Math.PI/180,cs=Math.cos(r),sn=Math.sin(r),c0=M.c0,
+  tx=mg+p.X*c-M.m.x,ty=mg+p.Y*c-M.m.y+(geo.along===Infinity?0:p.gi*geo.along);
+ return q=>{const x=q.x-c0.x,y=q.y-c0.y,a=x*cs-y*sn,b=x*sn+y*cs;return geo.phi?{x:a+ty,y:b+tx}:{x:a+tx,y:b+ty}}}
+function caDoc(R){const g=R.cfg.geo,T=g.along===Infinity?R.len:R.sheets*g.along,sh=k=>{const L=g.along===Infinity?R.len:g.along;return g.phi?{x:k*L,y:0,w:L,h:g.across}:{x:0,y:k*L,w:g.across,h:L}};
+ return{w:g.phi?T:g.across,h:g.phi?g.across:T,sheets:Array.from({length:Math.max(1,R.sheets)},(_,k)=>sh(k))}}
+function caPlan(R){return R.plan||(R.plan=R.res.map(p=>{const o=clone(p.it.o);mapObj(o,caF(p,R.cfg));return o}))}
+const caWeedOff=R=>R.cfg.mg>0?Math.min(CA.wOff,R.cfg.mg):CA.wOff;
+function caPreview(){const el=$('#caPrev'),R=caRes;
+ if(!R||R.err||!R.res.length){el.innerHTML=R&&R.err?esc(R.err):R?'Ни одна деталь не помещается на плёнку — увеличьте ширину или уменьшите отступ':'Раскладываю…';return}
+ const D=caDoc(R),pad=Math.max(D.w,D.h)*.015,mg=R.cfg.mg;let h=`<svg viewBox="${N(-pad)} ${N(-pad)} ${N(D.w+2*pad)} ${N(D.h+2*pad)}">`;
+ for(const s of D.sheets)h+=`<rect x="${N(s.x)}" y="${N(s.y)}" width="${N(s.w)}" height="${N(s.h)}" fill="#ececf1" stroke="#9a9aa6" stroke-width="1" vector-effect="non-scaling-stroke"/>`
+  +(mg>0&&s.w>2*mg&&s.h>2*mg?`<rect x="${N(s.x+mg)}" y="${N(s.y+mg)}" width="${N(s.w-2*mg)}" height="${N(s.h-2*mg)}" fill="none" stroke="#3d8bfd" stroke-opacity=".5" stroke-dasharray="4 3" stroke-width="1" vector-effect="non-scaling-stroke"/>`:'');
+ for(const o of caPlan(R))h+=`<path d="${pathD(o)}" fill="#24242c" fill-rule="evenodd" stroke="#24242c" stroke-width=".7" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>`;
+ const W=caWeedGeom(R);if(W)h+=`<path d="${pathD(weedObj(W))}" fill="none" stroke="#ff2d95" stroke-width="1" vector-effect="non-scaling-stroke"/>`;
+ el.innerHTML=h+'</svg>'}
+function caWeedGeom(R){return CA.weed==='none'||!R.res.length?null:weedGeom(caPlan(R).map(objBox),caWeedOff(R),CA.weed==='frame'?null:R.cfg.geo.phi?'v':'h',CA.weed==='grid')}
+function caResUI(){const el=$('#caRes'),R=caRes;if(!R||R.err){el.innerHTML='';return}
+ const g=R.cfg.geo,D=caDoc(R),area=D.w*D.h,roll=g.along===Infinity,ms=new Map(caObjs.map((o,i)=>[o.id,caMs[i]])),total=caObjs.length*CA.n;
+ let net=0,per=0,pc=0;for(const p of R.res){const m=ms.get(p.it.o.id);net+=m.net;per+=m.per;pc+=m.pc}
+ const W=caWeedGeom(R),wl=W?weedLen(W):0;if(W){per+=wl;pc+=1+W.L.length}
+ const starts=caPlan(R).flatMap(o=>o.sp.filter(s=>s.n.length>1).map(s=>s.n[0])).concat(W?[{x:W.fr.x,y:W.fr.y},...W.L.map(l=>({x:l[0],y:l[1]}))]:[]),idle=caIdle(starts),
+  v=CA.v*10,tCut=per/v,tPc=pc*CA.tp,tIdle=idle/(2*v),time=tCut+tPc+tIdle;
+ const row=(a,b,cl='')=>`<span>${a}</span><b class="${cl}">${b}</b>`,m2=caNum(area/1e6,3)+' м²';
+ let h=roll?row('Кусок плёнки',`${caNum(g.across,0)} × ${caNum(R.len,0)} мм`)+row('Расход',`${caNum(R.len/1000,3)} пог. м · ${m2}`)
+  :row('Листов',`${R.sheets} по ${caNum(CA.sw,0)} × ${caNum(CA.sh,0)} мм`)+row('Расход',m2);
+ h+=row('Занято деталями',caNum(area?net/area*100:0,1)+' %')+row('Разложено деталей',`${R.res.length} из ${total}`,R.fail.length?'bad':'')+row('Длина реза'+(W?' (с выборкой)':''),caL(per))
+  +row('Врезок',caNum(pc,0))+`<span title="Резка ${caT(tCut)} · врезки ${caT(tPc)} · холостой ход ${caT(tIdle)} (вдвое быстрее резки). Оценка: настоящее время зависит от плоттера и порядка реза">Время резки</span><b>≈ ${caT(time)}</b>`;
+ const fq=CA.pfu==='lm'?R.len/1000:CA.pfu==='sheet'?R.sheets:area/1e6,fu=CA.pfu==='lm'?'пог. м':CA.pfu==='sheet'?caPl(R.sheets,'лист','листа','листов'):'м²',fc=fq*CA.pf,cc=per/1000*CA.pc;
+ const pcC=pc*CA.pp,hC=time/3600*CA.ph,sub=fc+cc+pcC+hC,mkC=sub*CA.mk/100,tot=Math.max(sub+mkC,CA.min);
+ if(CA.pf||CA.pc||CA.pp||CA.ph||CA.min)h+='<div class="ln"></div>'+(CA.pf?row('Плёнка',`${caNum(fq,3)} ${fu} × ${caNum(CA.pf,2)} = ${caNum(fc,2)} ₽`):'')+(CA.pc?row('Резка',`${caNum(per/1000,3)} м × ${caNum(CA.pc,2)} = ${caNum(cc,2)} ₽`):'')
+  +(CA.pp?row('Врезки',`${caNum(pc,0)} × ${caNum(CA.pp,2)} = ${caNum(pcC,2)} ₽`):'')+(CA.ph?row('Работа плоттера',`${caT(time)} × ${caNum(CA.ph,2)} ₽/ч = ${caNum(hC,2)} ₽`):'')
+  +(CA.mk?row('Наценка '+caNum(CA.mk,1)+' %','+ '+caNum(mkC,2)+' ₽'):'')+'<div class="ln"></div>'+row('Итого',caNum(tot,2)+' ₽','tot')
+  +(tot>sub+mkC+1e-9?'<span class="mu">Посчитано меньше минимума заказа — показан минимум.</span>':'');
+ else h+='<span class="mu">Укажите цены слева — посчитаю стоимость плёнки, резки и работы.</span>';
+ if(R.fail.length)h+=`<span class="mu bad">Не поместились на плёнку: ${R.fail.length} — они больше ширины рулона или листа за вычетом отступов и останутся на своих местах.</span>`;
+ el.innerHTML=h}
+function caState(t=''){const stale=!caRes||caRes.k!==caKey();$('#caState').textContent=CA.tab==='2'?'':caBusy?(caMoreOn?'Ищу более плотную раскладку…':'Раскладываю…'):t;
+ $('#caGo').disabled=caBusy||stale||!!caRes.err||!caRes.res.length;$('#caMore').disabled=!caMoreOn&&(caBusy||stale||!!caRes.err||!caRes.res.length);$('#caMore').textContent=caMoreOn?'Остановить':'Искать плотнее'}
+function caApply(){const R=caRes;if(caBusy||!R||R.err||!R.res.length||R.k!==caKey())return;
+ if(!caObjs.every(o=>S.objects.includes(o))){closeCalc();note('Документ изменился, пока было открыто окно, — откройте «Расчёт» ещё раз');return}
+ const src=new Map(caObjs.map(o=>[o.id,clone(o)])),ids=[],D=caDoc(R),g=R.cfg.geo;
+ for(const p of R.res){let o=p.it.o;if(p.it.k){o=clone(src.get(o.id));o.id=nid();o.name=p.it.o.name+' · '+(p.it.k+1);if(o.qr)o.qr.bgId=null;S.objects.push(o)}mapObj(o,caF(p,R.cfg));ids.push(o.id)}
+ S.page.w=N(D.w);S.page.h=N(D.h);if(R.sheets>1)S.page.g=(S.page.g||[]).concat(D.sheets.slice(1).map(s=>g.phi?{v:true,p:N(s.x)}:{v:false,p:N(s.y)}));
+ if(CA.weed!=='none'){const W=weedGeom(ids.map(id=>objBox(byId(id))),caWeedOff(R),CA.weed==='frame'?null:g.phi?'v':'h',CA.weed==='grid');if(W){const w=weedObj(W);S.objects.push(w);ids.push(w.id)}}
+ sel=ids;closeCalc();if(tool!=='select')setTool('select');commit('Раскладка на плёнке');fit();panel();
+ note(`Разложено: ${R.res.length} ${caPl(R.res.length,'деталь','детали','деталей')}${CA.weed!=='none'?' + выборка':''}. Страница — ${R.sheets>1?R.sheets+' '+caPl(R.sheets,'лист','листа','листов')+' (границы — направляющие)':'кусок плёнки '+caNum(D.w,0)+' × '+caNum(D.h,0)+' мм'}. Отменить — Ctrl+Z`)}
+/* холостой ход ножа между контурами (оценка): полосами по 50 мм, змейкой — примерно так режут плоттеры «снизу вверх» */
+function caIdle(P){if(!P.length)return 0;const q=P.map(p=>({x:p.x,y:p.y,b:Math.floor(p.y/50)})).sort((a,b)=>a.b-b.b||(a.b%2?b.x-a.x:a.x-b.x));let d=Math.hypot(q[0].x,q[0].y);for(let i=1;i<q.length;i++)d+=dist(q[i-1],q[i]);return d}
+/* рамка и линии выборки вокруг габаритов B: рамка с отступом off; dir — линии в промежутках между рядами ('h' — горизонтальные, 'v' — вертикальные),
+   grid — ещё и поперечные отрезки внутри каждой полосы. Линии идут только там, где их не пересекает ни одна деталь */
+function weedGeom(B,off,dir,grid){const F=boxOf(B.flatMap(b=>[{x:b.x,y:b.y},{x:b.x+b.w,y:b.y+b.h}]));if(!F)return null;
+ const fr={x:F.x-off,y:F.y-off,w:F.w+2*off,h:F.h+2*off},L=[];if(!dir)return{fr,L};
+ const gaps=iv=>{iv.sort((a,b)=>a[0]-b[0]);const r=[];let e=null;for(const[a,b]of iv){if(e!==null&&a-e>=.5)r.push((a+e)/2);e=e===null?b:Math.max(e,b)}return r};
+ const H=dir==='h',p=H?'y':'x',ps=H?'h':'w',q=H?'x':'y',qs=H?'w':'h',cuts=gaps(B.map(b=>[b[p],b[p]+b[ps]]));
+ for(const c of cuts)L.push(H?[fr.x,c,fr.x+fr.w,c]:[c,fr.y,c,fr.y+fr.h]);
+ if(grid){const E=[fr[p],...cuts,fr[p]+fr[ps]];for(let i=0;i<E.length-1;i++){const lo=E[i],hi=E[i+1],inS=B.filter(b=>b[p]+b[ps]/2>lo&&b[p]+b[ps]/2<hi);
+  for(const c of gaps(inS.map(b=>[b[q],b[q]+b[qs]])))L.push(H?[c,lo,c,hi]:[lo,c,hi,c])}}
+ return{fr,L}}
+const weedLen=W=>2*(W.fr.w+W.fr.h)+W.L.reduce((s,[a,b,c,d])=>s+Math.hypot(c-a,d-b),0);
+function weedObj(W){const o=newPath('Выборка');o.fill=null;o.stroke='#ff2d95';o.sw=.3;const{fr}=W;
+ o.sp=[{c:true,n:shapeNodes('rect',fr.x,fr.y,fr.w,fr.h)},...W.L.map(([a,b,c,d])=>({c:false,n:[mkN({x:a,y:b}),mkN({x:c,y:d})]}))];return o}
+const caAlive=()=>caObjs.filter(o=>S.objects.includes(o));
+function caDone(ids,nm,msg){sel=ids;closeCalc();if(tool!=='select')setTool('select');commit(nm);render();panel();note(msg)}
+/* вкладка «Подготовка к резке»: рамка и линии выборки вокруг выделенного */
+function caWeed(){const os=caAlive();if(!os.length)return;const m=CA.wMode,W=weedGeom(os.map(objBox),CA.wOff,m==='frame'?null:m==='v'?'v':'h',m==='grid');const o=weedObj(W);S.objects.push(o);
+ caDone([o.id],'Рамка и линии выборки',`Выборка добавлена: рамка${W.L.length?' и '+W.L.length+' '+caPl(W.L.length,'линия','линии','линий'):''}, длина реза ${caNum(weedLen(W)/1000,2)} м`)}
+/* контур с отступом — через Clipper (Angus Johnson, Boost License): кривые → многоугольники в микронах → объединение → отступ */
+async function caOffset(){const os=caAlive();if(!os.length)return;try{await loadLib(CLIPPER,'модуль «Контур с отступом»')}catch(e){note(e.message);return}
+ const C=ClipperLib,K=1000,FT=C.PolyFillType,
+  poly=o=>o.sp.map(flatSp).filter(s=>s.c&&s.p.length>2).map(s=>s.p.map(p=>({X:Math.round(p.x*K),Y:Math.round(p.y*K)}))),
+  union=(paths,ft)=>{const c=new C.Clipper(),r=new C.Paths();c.AddPaths(paths,C.PolyType.ptSubject,true);c.Execute(C.ClipType.ctUnion,r,ft,ft);return r};
+ const made=[];
+ for(const g of CA.offAll?[os]:os.map(o=>[o])){let P=g.length===1?union(poly(g[0]),FT.pftEvenOdd):union(g.flatMap(o=>union(poly(o),FT.pftEvenOdd)),FT.pftNonZero);
+  if(CA.offFill)P=P.filter(p=>C.Clipper.Orientation(p));if(!P.length)continue;
+  const co=new C.ClipperOffset(2,.01*K),out=new C.Paths();co.AddPaths(P,CA.offJ==='round'?C.JoinType.jtRound:C.JoinType.jtMiter,C.EndType.etClosedPolygon);co.Execute(out,(CA.offIn?-1:1)*CA.off*K);
+  const cl=C.Clipper.CleanPolygons(out,.002*K).filter(p=>p.length>2);if(!cl.length)continue;
+  const o=newPath('Контур '+(CA.offIn?'−':'+')+caNum(CA.off,2)+' мм');o.fill=null;o.stroke='#000000';o.sw=.25;o.sp=cl.map(p=>({c:true,n:p.map(q=>mkN({x:q.X/K,y:q.Y/K}))}));
+  S.objects.splice(Math.min(...g.map(x=>S.objects.indexOf(x))),0,o);made.push(o)}
+ if(!made.length){note('Контур не получился: при таком отступе внутрь детали исчезают — уменьшите отступ');return}
+ caDone(made.map(o=>o.id),'Контур с отступом',`Готово: ${made.length===1?'контур':made.length+' '+caPl(made.length,'контур','контура','контуров')} ${CA.offIn?'внутрь':'наружу'} на ${caNum(CA.off,2)} мм — он под деталями, его можно перекрасить или залить`)}
+/* тираж заполнением: выделенное одним блоком — рядами по странице; «общий рез» — прямоугольник превращается в сетку линий (каждая граница режется один раз) */
+const isRect=o=>o.type==='path'&&o.sp.length===1&&o.sp[0].c&&o.sp[0].n.length===4&&o.sp[0].n.every((q,i,a)=>!q.a&&!q.b&&(Math.abs(q.x-a[(i+1)%4].x)<1e-6||Math.abs(q.y-a[(i+1)%4].y)<1e-6));
+function caFillPage(){const os=caAlive();if(!os.length)return;if(CA.fShare&&!(os.length===1&&isRect(os[0]))){note('«Общий рез» — для одного прямоугольника: выделите прямоугольную наклейку или снимите галочку');return}
+ const B=boxOf2(os),g=CA.fShare?0:CA.fGap,mg=CA.fMg,sx=B.w+g,sy=B.h+g,cols=w=>Math.floor((S.page.w-2*mg+g-w)/sx+1e-9);
+ const c0=cols(0);if(c0<1){note('Блок не помещается по ширине страницы — увеличьте страницу (панель «Страница») или уменьшите отступ');return}
+ const ch=CA.fChess&&cols(sx/2)>=1,c1=ch?cols(sx/2):c0,cells=[],N=CA.fN>0?CA.fN:Infinity,rows=CA.fN>0?Infinity:Math.max(1,Math.floor((S.page.h-2*mg+g)/sy+1e-9));
+ for(let r=0;r<rows&&cells.length<N;r++){const k=r%2&&ch?c1:c0;for(let c=0;c<k&&cells.length<N;c++)cells.push({x:mg+(r%2&&ch?sx/2:0)+c*sx,y:mg+r*sy,r})}
+ const need=Math.max(...cells.map(c=>c.y))+B.h+mg,longer=need>S.page.h+1e-6;if(longer)S.page.h=N2c(need);
+ let ids=[];
+ if(CA.fShare){const R0=os[0],rw={};for(const c of cells)(rw[c.r]||(rw[c.r]={y:c.y,a:1e9,b:-1e9,xs:[]})),rw[c.r].a=Math.min(rw[c.r].a,c.x),rw[c.r].b=Math.max(rw[c.r].b,c.x+B.w),rw[c.r].xs.push(c.x);
+  const R=Object.values(rw),seg=[],vx=new Map();
+  R.forEach((r,i)=>{const p=R[i-1];seg.push([p?Math.min(p.a,r.a):r.a,r.y,p?Math.max(p.b,r.b):r.b,r.y]);if(i===R.length-1)seg.push([r.a,r.y+B.h,r.b,r.y+B.h]);
+   for(const x of[...r.xs,r.b]){const k=Math.round(x*1000);(vx.get(k)||vx.set(k,[]).get(k)).push([r.y,r.y+B.h])}});
+  for(const[k,iv]of vx){iv.sort((a,b)=>a[0]-b[0]);let cur=null;for(const[a,b]of iv){if(cur&&a<=cur[1]+1e-6)cur[1]=Math.max(cur[1],b);else{if(cur)seg.push([k/1000,cur[0],k/1000,cur[1]]);cur=[a,b]}}seg.push([k/1000,cur[0],k/1000,cur[1]])}
+  const o=newPath('Прямоугольный раскрой');o.fill=null;o.stroke=R0.stroke||'#000000';o.sw=R0.sw||.25;o.sp=seg.map(([a,b,c,d])=>({c:false,n:[mkN({x:a,y:b}),mkN({x:c,y:d})]}));
+  S.objects.splice(S.objects.indexOf(R0),1,o);ids=[o.id]}
+ else{const snap=os.map(clone);cells.forEach((c,i)=>{const dx=c.x-B.x,dy=c.y-B.y,mv=q=>({x:q.x+dx,y:q.y+dy});
+  if(!i)for(const o of os){mapObj(o,mv);ids.push(o.id)}else for(const o0 of snap){const o=clone(o0);o.id=nid();o.name=o0.name+' · '+(i+1);if(o.qr)o.qr.bgId=null;mapObj(o,mv);S.objects.push(o);ids.push(o.id)}})}
+ caDone(ids,'Тираж заполнением',`Копий: ${cells.length}${CA.fShare?' — общий рез, каждая граница режется один раз':''}${longer?'. Страница удлинена до '+caNum(S.page.h,0)+' мм':''}`);if(longer)fit()}
+const N2c=v=>Math.round(v*100)/100;
+/* чистка макета: пустые и повторные контуры, разорванные стыки (сшить и замкнуть), лишние узлы, одинаковые объекты. Надписи не трогаются */
+function cleanObjs(os){const n={dup:0,dsp:0,join:0,close:0,node:0,empty:0},H=v=>Math.round(v*100),hq=q=>q&&[H(q.x),H(q.y)],key=sp=>JSON.stringify([!!sp.c,sp.n.map(q=>[H(q.x),H(q.y),hq(q.a),hq(q.b)])]);
+ for(const o of os){const k=o.sp.length;o.sp=o.sp.filter(s=>s.n.length>1);n.empty+=k-o.sp.length;const seen=new Set;o.sp=o.sp.filter(s=>{const x=key(s);if(seen.has(x)){n.dsp++;return false}seen.add(x);return true})}
+ const T=.1,nd=(a,b)=>dist(a,b)<=T,rev=sp=>{sp.n.reverse();for(const q of sp.n){const t=q.a;q.a=q.b;q.b=t}},pool=[];
+ for(const o of os)for(const sp of o.sp)if(!sp.c)pool.push({o,sp});
+ for(let ch=true;ch;){ch=false;
+  for(const A of pool){if(A.dead||A.sp.c)continue;
+   for(const B of pool){if(B===A||B.dead||B.sp.c)continue;const a=A.sp.n,b=B.sp.n,ae=a[a.length-1],be=b[b.length-1];let ok=true;
+    if(nd(ae,b[0]));else if(nd(ae,be))rev(B.sp);else if(nd(a[0],be)){rev(A.sp);rev(B.sp)}else if(nd(a[0],b[0]))rev(A.sp);else ok=false;
+    if(ok){const P=A.sp.n[A.sp.n.length-1],Q=B.sp.n[0];P.b=Q.b;P.s=false;A.sp.n.push(...B.sp.n.slice(1));B.dead=true;B.o.sp=B.o.sp.filter(x=>x!==B.sp);n.join++;ch=true;break}}
+   const a=A.sp.n;if(!A.sp.c&&a.length>2&&nd(a[0],a[a.length-1])){const L=a.pop();a[0].a=L.a;A.sp.c=true;n.close++;ch=true}}}
+ const line=(p,m,q)=>{const L=dist(p,q);if(L<1e-9)return false;const t=((m.x-p.x)*(q.x-p.x)+(m.y-p.y)*(q.y-p.y))/(L*L);return t>0&&t<1&&Math.abs((q.x-p.x)*(m.y-p.y)-(q.y-p.y)*(m.x-p.x))/L<.01};
+ for(const o of os)for(const sp of o.sp){const a=sp.n;
+  for(let i=0;i<a.length&&a.length>2;){const j=(i+1)%a.length;if(!sp.c&&j===0)break;if(dist(a[i],a[j])<.005){a[i].b=a[j].b;a.splice(j,1);n.node++;if(j<i)i--;continue}i++}
+  for(let i=sp.c?0:1;i<(sp.c?a.length:a.length-1)&&a.length>(sp.c?3:2);){const p=a[(i-1+a.length)%a.length],m=a[i],q=a[(i+1)%a.length];
+   if(!p.b&&!m.a&&!m.b&&!q.a&&line(p,m,q)){a.splice(i,1);n.node++}else i++}}
+ const seen=new Map,keep=[];for(const o of os){if(!o.sp.length)continue;const k=o.sp.map(key).sort().join('|');if(seen.has(k)){n.dup++;continue}seen.set(k,o);keep.push(o)}
+ return{n,keep}}
+const caCleanTargets=()=>caAlive().filter(o=>!o.txt);
+function caCleanText(n){const t=[[n.dup,'одинаковых объектов (лишние копии)'],[n.dsp,'повторных контуров внутри объектов'],[n.join,'разорванных стыков'],[n.close,'незамкнутых контуров, которые можно замкнуть'],[n.node,'лишних узлов'],[n.empty,'пустых контуров']].filter(x=>x[0]);
+ return t.length?t.map(([k,s])=>`<b>${k}</b> ${s}`).join(' · '):'Всё чисто — исправлять нечего.'}
+function caCleanFind(){const os=caCleanTargets();$('#caCleanRep').innerHTML=os.length?'Найдено: '+caCleanText(cleanObjs(os.map(clone)).n):'Нет кривых для проверки (надписи не проверяются).'}
+function caCleanGo(){const os=caCleanTargets();if(!os.length)return;const cs=os.map(clone),{n,keep}=cleanObjs(cs);
+ if(!Object.values(n).some(Boolean)){$('#caCleanRep').innerHTML=caCleanText(n);return}
+ const kept=new Map(keep.map(o=>[o.id,o]));S.objects=S.objects.flatMap(o=>!os.includes(o)?[o]:kept.has(o.id)?[kept.get(o.id)]:[]);
+ caDone(keep.map(o=>o.id),'Чистка макета','Исправлено: '+caCleanText(n).replace(/<\/?b>/g,''))}
+$('#caModal').addEventListener('input',e=>{if(e.target.matches('input'))caChanged()});
+$('#caModal').addEventListener('change',e=>{if(e.target.matches('select'))caChanged()});
+$('#caMode').onclick=e=>{const b=e.target.closest('button');if(b){CA.mode=b.dataset.v;caChanged()}};
+$('#caDir').onclick=e=>{const b=e.target.closest('button');if(b){CA.dir=b.dataset.v;caChanged()}};
+$('#caTabs').onclick=e=>{const b=e.target.closest('button');if(b){CA.tab=b.dataset.v;caChanged()}};
+$('#caOffDir').onclick=e=>{const b=e.target.closest('button');if(b){CA.offIn=b.dataset.v==='in';caChanged()}};
+$('#caOffJ').onclick=e=>{const b=e.target.closest('button');if(b){CA.offJ=b.dataset.v;caChanged()}};
+$('#caOffGo').onclick=caOffset;$('#caWGo').onclick=caWeed;$('#caFGo').onclick=caFillPage;$('#caCleanFind').onclick=caCleanFind;$('#caCleanGo').onclick=caCleanGo;
+$('#caClose').onclick=$('#caCancel').onclick=closeCalc;$('#caGo').onclick=caApply;
+$('#caMore').onclick=()=>{if(caMoreOn){caTok++;caBusy=caMoreOn=false;caState('Остановлено — показан лучший найденный вариант');return}caLayout(true)};
+$('#calcBtn').hidden=!NATIVE;$('#calcBtn').onclick=openCalc;
+
 /* ---------- меню и клавиши ---------- */
 function menu(a){({new:newDoc,open:openProject,save:()=>saveProject(false),saveas:()=>saveProject(true),import:()=>$('#fImg').click(),qr:()=>qrOpen(null),svg:exportSVG,pdf:exportPDF,eps:exportEPS,dxf:exportDXF,png:exportPNG,
  undo,redo,zin:()=>zoomC(1.25),zout:()=>zoomC(.8),fit,up:()=>order('up'),down:()=>order('down'),dup:()=>dup(),del:()=>del()})[a]()}
@@ -1450,6 +1817,7 @@ const KT={t:'text',f8:'text',v:'select',n:'node',p:'pen',r:'rect',e:'ellipse',y:
 addEventListener('keydown',e=>{if(e.key==='Escape'&&document.querySelector('.menu.open')){closeMenus();return}
  if($('#exModal').classList.contains('open')){if(e.key==='Escape')closeExport();else if(e.key==='Enter'&&e.target.tagName!=='SELECT'){e.preventDefault();doExport()}return}
  if($('#fbModal').classList.contains('open')){if(e.key==='Escape')closeFb();return}
+ if($('#caModal').classList.contains('open')){if(e.key==='Escape')closeCalc();return}
  if(!$('#qrm').hidden){if(e.key==='Escape')qrClose();else if(e.key==='Enter'&&(e.ctrlKey||e.target.tagName==='INPUT'))$('#qrOk').click();return}
  if(e.target.matches('input,select,textarea'))return;if(e.key.toLowerCase()==='q'&&!e.ctrlKey&&!e.metaKey){qrOpen(null);return}const k=e.key.toLowerCase(),c=e.ctrlKey||e.metaKey;
  if(e.code==='Space'){e.preventDefault();if(!space){space=true;svg.style.cursor='grab'}return}

@@ -113,6 +113,7 @@ function buildMenu() {
       K('Сохранить', 'Ctrl+S', 'saveProject(false)'),
       K('Сохранить как…', 'Ctrl+Shift+S', 'saveProject(true)'),
       K('Экспорт (SVG, PDF, EPS, DXF, PNG)…', 'Ctrl+E', 'openExport()'),
+      { label: 'Расчёт плёнки (длина реза, площадь, раскладка, стоимость)…', click: inPage('openCalc()') },
       { type: 'separator' },
       { label: 'Закрыть окно', accelerator: 'Ctrl+W', role: 'close' },
       { label: 'Выход', role: 'quit' } ] },

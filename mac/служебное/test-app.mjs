@@ -52,6 +52,12 @@ ok('«Скопировать» из меню «Правка»', await ev(`clip =
 ok('мостик не отдаёт чужие файлы', (await ev(`fmNative.vendor('../../main.js').then(b => b === null)`)) && (await ev(`fmNative.vendor('fonts/lobster-latin-400-normal.woff').then(b => b && b.length > 1000)`)));
 const ai = await ev(`(async () => { const n0 = S.objects.length; await importFiles([new File([buildPDF()], 'проба.ai')]); return (S.objects.length - n0) + ' · ' + document.querySelector('#toast').textContent })()`);
 ok('файл Illustrator (.ai) — кривыми, без интернета', /Открыто кривыми/.test(ai) && await ev(`[...document.scripts].some(s => s.src.includes('vendor/libs/pdf.min.js'))`), ai);
+const ca = await ev(`(async () => { const vis = getComputedStyle(document.querySelector('#calcBtn')).display !== 'none'; sel = []; Object.assign(CA, { mode: 'roll', rw: 600, n: 3, mg: 10, gap: 3, rot: '90', nest: true, pf: 450, pfu: 'm2', pc: 35 }); openCalc();
+  for (let i = 0; i < 100 && (caBusy || !caRes); i++) await new Promise(r => setTimeout(r, 100)); const t = document.querySelector('#caRes .tot'); const r = { vis, n: caRes && caRes.res.length, all: caObjs.length * 3, t: t && t.textContent }; closeCalc(); return r })()`);
+ok('«Расчёт плёнки»: кнопка есть, раскладка и стоимость', ca && ca.vis && ca.n > 0 && ca.n === ca.all && !!ca.t, ca && `${ca.n} из ${ca.all} деталей, итого ${ca.t}`);
+const off = await ev(`(async () => { const r = S.objects.find(o => o.type === 'path' && !o.txt); sel = [r.id]; Object.assign(CA, { tab: '2', off: 2, offIn: false, offAll: true, offFill: false, offJ: 'round' }); openCalc(); const n0 = S.objects.length; await caOffset();
+  const o = S.objects.find(o => o.name.startsWith('Контур +')); const ok = !!o && S.objects.length === n0 + 1 && [...document.scripts].some(s => s.src.includes('vendor/libs/clipper.js')); if (o) undo(); return ok })()`);
+ok('«Контур с отступом» без интернета (Clipper изнутри)', off === true);
 const arch = await ev(`fmNative.arch`); ok('процессор и установщик для обновления', !!arch, arch + ' → Kontur-mac-' + (arch === 'arm64' ? 'apple' : 'intel') + '.dmg');
 ws.close(); proc.kill(); await sleep(400); rmSync(TMP, { recursive: true, force: true });
 const errs = logs.split('\n').filter(l => /error|ошибк/i.test(l) && !/DevTools|GPU process|gles|Gpu|DevToolsActivePort/i.test(l));

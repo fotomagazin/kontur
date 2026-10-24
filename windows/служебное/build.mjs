@@ -33,7 +33,8 @@ async function get(url) {
 }
 const LIBS = { 'paper-core.min.js': 'paper@0.12.18/dist/paper-core.min.js', 'opentype.min.js': 'opentype.js@1.3.4/dist/opentype.min.js',
   'UTIF.js': 'utif@3.1.0/UTIF.js', 'heic2any.min.js': 'heic2any@0.0.4/dist/heic2any.min.js',
-  'pdf.min.js': 'pdfjs-dist@3.11.174/build/pdf.min.js', 'pdf.worker.min.js': 'pdfjs-dist@3.11.174/build/pdf.worker.min.js' };   // pdf.js — открытие PDF и .ai кривыми
+  'pdf.min.js': 'pdfjs-dist@3.11.174/build/pdf.min.js', 'pdf.worker.min.js': 'pdfjs-dist@3.11.174/build/pdf.worker.min.js',
+  'clipper.js': 'clipper-lib@6.4.2/clipper.js' };   // Clipper — «Контур с отступом» в окне «Расчёт плёнки»   // pdf.js — открытие PDF и .ai кривыми
 if (existsSync(MAC_VENDOR)) cpSync(MAC_VENDOR, VENDOR, { recursive: true, force: false, errorOnExist: false });   // готовое — из программы для Mac
 if (true) {   // докачиваем только недостающее (новые шрифты/библиотеки появятся сами при следующей сборке)
   mkdirSync(join(VENDOR, 'fonts'), { recursive: true }); mkdirSync(join(VENDOR, 'libs'), { recursive: true }); let got = 0;
@@ -45,7 +46,7 @@ if (true) {   // докачиваем только недостающее (но�
   if (got) console.log('скачано файлов:', got);
   writeFileSync(join(VENDOR, 'LICENSES.txt'), 'Внутри программы лежат копии сторонних файлов, чтобы она работала без интернета:\n' +
     '• Шрифты ' + FONTS.map(f => f[0]).join(', ') + ' — Google Fonts через Fontsource, SIL Open Font License 1.1 / Apache 2.0.\n' +
-    '• paper.js 0.12.18 (MIT), opentype.js 1.3.4 (MIT), UTIF.js 3.1.0 (MIT), heic2any 0.0.4 (MIT), pdf.js 3.11.174 (Apache 2.0).\n');
+    '• paper.js 0.12.18 (MIT), opentype.js 1.3.4 (MIT), UTIF.js 3.1.0 (MIT), heic2any 0.0.4 (MIT), pdf.js 3.11.174 (Apache 2.0), Clipper 6.4.2 (Angus Johnson, Boost Software License 1.0).\n');
 }
 rmSync(join(HERE, 'app'), { recursive: true, force: true }); mkdirSync(join(HERE, 'app'));
 writeFileSync(join(HERE, 'app', 'kontur.html'), html);
